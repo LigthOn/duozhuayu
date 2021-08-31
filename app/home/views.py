@@ -1,11 +1,11 @@
-from app.home import usersManage
-from app.home.usersManage.forms import LoginForm
+from app import home
+from app.home.forms import LoginForm
 from flask import render_template, url_for, redirect, flash, session
 
 from app.models import User
 
 """登录"""
-@usersManage.route("/login/", methods=["GET", "POST"])
+@home.route("/login/", methods=["GET", "POST"])
 def login():
     if "user_id" in session:        # 如果已经登录，则直接跳转到首页
         return redirect(url_for("home.index"))
