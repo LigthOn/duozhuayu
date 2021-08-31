@@ -13,7 +13,7 @@
 				<div class="login-wrap"
 					style="margin-bottom: 60px; margin-top: 50px">
 					<div style="max-width: 540px; margin: 0 auto;">
-						<a href="index.html" title="点击返回首页">
+						<a href="login.html" title="点击返回首页">
 							<img src="{{url_for('static',filename='home/images/51logo.png')}}"></a>
 					</div>
 					<div class="register">
@@ -28,6 +28,18 @@
 										<!-- 账户文本框 -->
 										{{form.username}}
 										{% for err in form.username.errors %}
+										<span class="error">{{ err }}</span>
+										{% endfor %}
+									</div>
+								</div>
+                                <div class="form-group">
+									<div class="col-sm-4 control-label">
+										{{form.phone.label}}
+									</div>
+									<div class="col-sm-8" style="clear: none;">
+										<!-- 输入联系电话的文本框 -->
+										{{form.phone}}
+										{% for err in form.phone.errors %}
 										<span class="error">{{ err }}</span>
 										{% endfor %}
 									</div>
@@ -57,15 +69,9 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<div class="col-sm-4 control-label">
-										{{form.phone.label}}
-									</div>
-									<div class="col-sm-8" style="clear: none;">
-										<!-- 输入联系电话的文本框 -->
-										{{form.phone}}
-										{% for err in form.phone.errors %}
-										<span class="error">{{ err }}</span>
-										{% endfor %}
+									<div class="col-sm-offset-4 col-sm-8">
+										{{ form.csrf_token }}
+										{{ form.submit }}
 									</div>
 								</div>
 								<div class="form-group" style="margin: 20px;">

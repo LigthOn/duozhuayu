@@ -20,12 +20,12 @@
 							<fieldset>
 								<div class="form-group">
 									<div class="col-sm-4 control-label">
-										<label id="username-lbl" for="username" class="required">账户 ：</label>
+										<label id="username-lbl" for="userphone" class="required">账户 ：</label>
 									</div>
 									<div class="col-sm-8">
 										<!-- 账户文本框 -->
-										{{form.username}}
-										{% for err in form.username.errors %}
+										{{form.phone}}
+										{% for err in form.phone.errors %}
 										<span class="error">{{ err }}</span>
 										{% endfor %}
 									</div>
