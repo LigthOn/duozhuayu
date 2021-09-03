@@ -17,9 +17,10 @@ def register():
             username = data["username"],
             phone = data["phone"],
             password = data["password"]
+            #password = generate_password_hash(data["password"]),  # 对密码加密
         )
-        db.session.add(User)
-        db.session.commit()
+        db.session.add(user)   #插入数据
+        db.session.commit()    #提交
         return redirect(url_for("home.login"))
     return render_template("home/register.html", form=form)
 
