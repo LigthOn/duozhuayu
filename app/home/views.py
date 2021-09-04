@@ -5,7 +5,7 @@ from app import db
 from app.home.forms import LoginForm,RegisterForm
 from flask import render_template, url_for, redirect, flash, session
 
-from app.models import User,Goods
+from app.models import User,Books
 
 """注册"""
 @home.route("/register/",methods=["POST", "GET"])
@@ -28,8 +28,8 @@ def register():
 """登录"""
 @home.route("/login/", methods=["GET", "POST"])
 def login():
-    #if "user_id" in session:        # 如果已经登录，则直接跳转到首页
-    #    return redirect(url_for("home.index"))
+    if "user_id" in session:        # 如果已经登录，则直接跳转到首页
+        return redirect(url_for("home.index"))
     form = LoginForm()              # 实例化LoginForm类
     if form.validate_on_submit():   # 如果提交
         data = form.data            # 接收表单数据
@@ -51,10 +51,25 @@ def login():
 
     return render_template("home/login.html",form=form) # 渲染登录页面模板
 
+"""登出"""
+@home.route("/logout/")
+def logout():
+    """
+    退出登录
+    """
+    # 重定向到home模块下的登录。
+    session.pop("user_id", None)
+    session.pop("phone", None)
+    return redirect(url_for('home.login'))
+
 
 """首页"""
 @home.route("/")
 def index():
+    # 获取10个热门商品
+    hot_books = Books.query.order_by(Books.sale_count.desc()).limit(10).all()
+    return render_template('home/index.html', hot_books=hot_books) #渲染模板
+
     # 获取2个热门商品
     # hot_goods = Goods.query.order_by(Goods.views_count.desc()).limit(2).all()
     # # 获取12个新品
@@ -65,8 +80,7 @@ def index():
     # sale_goods = Goods.query.filter_by(is_sale=1).order_by(
     #                 Goods.addtime.desc()
     #                     ).limit(12).all()
-    hot_goods = Goods
-    print(Goods)
+    #hot_goods = Goods
+    #print(Goods)
     new_goods = []
     # return render_template('home/index.html',new_goods=new_goods,sale_goods=sale_goods,hot_goods=hot_goods) # 渲染模板
-    return render_template('home/index.html')
