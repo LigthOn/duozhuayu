@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>首页-多抓鱼^3^</title>
+
+    <meta name="description" content="多抓鱼^3^">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+    <link rel="stylesheet" href="../../static/css/normalize-and-boilerplate.css" />
+    <link rel="stylesheet" href="../../static/css/font-awesome.css" />
+    <link rel="stylesheet" href="../../static/css/flexslider.css" />
+    <link rel="stylesheet" href="../../static/css/style.css" />
+
+    <script src="../../static/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+  </head>
+  <body>
+
+  <!-- 导航栏 -->
+    <!-- start: header -->
+    <header class="header">
+      <div class="row max-inner">
+
+        <div class="columns col-2">
+          <a href="index.html" title="多抓鱼" class="logo">多抓ζ°)))彡</a>
+        </div>
+
+        <div class="columns col-6">
+          <a href="#" class="toggle-nav">
+            <i class="fa fa-bars"></i> Menu
+          </a>
+          <nav class="main-nav">
+            <ul>
+              <li><a href="index.html">New collection</a></li>
+              <li><a href="index.html">Catalog</a></li>
+              <li><a href="index.html">Promotion</a></li>
+              <li><a href="index.html">Gift card</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="columns col-4">
+          <ul class="header-controls">
+            <li class="header-search">
+              <a href="{{url_for('home.search')}}" class="reveal-search">
+                <i class="fa fa-search"></i> Search
+              </a>
+              <div class="search-wrapper">
+                <form class="search-form">
+                    <input placeholder="Search..." type="text">
+                </form>
+              </div>
+            </li>
+            <li class="header-cart">
+              <a href="cart.html" title="view cart">
+                <span class="fa fa-shopping-cart"></span>
+                <span class="cart-count">3 Products,</span>
+                <span class="cart-amount">$780.00</span>
+              </a>
+            </li>
+            <li class="header-actions">
+              <a href="{{url_for('home.logout')}}" title="Log out"><span class="fa fa-lock"></span> Log out</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </header>
+    <!-- end: header -->
+
+    <!-- start: breadcrumbs -->
+    <section class="row breadcrumbs max-inner">
+      <div class="columns col-12">
+        <ul class="breadcrumb-list">
+          <li><a href="index.html">Home</a></li>
+          <li>Product page</li>
+        </ul>
+      </div>
+    </section>
+    <!-- end: breadcrumbs -->
+
+
+
+    <!-- start: main content -->
+    <section class="main-content">
+      <div class="row max-inner">
+        
+        <div class="columns col-5 product-media">
+          <a href="#"><img src="images/product-image-1.jpg" /></a>
+        </div>
+
+        <div class="columns col-6 product-info float-right">
+          
+          <span class="product-meta">Manufacturer name</span>
+          <h2>Consectetur adipisicing elit</h2>
+          <span class="product-price">$220.00</span>
+
+          <div class="row product-desc">
+            <p>
+              Perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas.              
+            </p>
+          </div>
+
+
+          <!-- start: product options form -->
+          <form action="cart.html">
+
+          <div class="row product-options">
+            
+            <div class="columns col-4 sort-options">
+              <span class="label-text">Size:</span>
+              <label for="size-select" class="select-label">
+                <select class="styled-drop-down"  id="size-select" name="size-select">
+                  <option selected="selected">XS</option>
+                  <option>S</option>
+                  <option>M</option>
+                  <option>L</option>
+                  <option>XL</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="columns col-4 sort-options">
+              <span class="label-text">Color:</span>
+              <label for="color-select" class="select-label">
+                <select class="styled-drop-down" id="color-select" name="color-select">
+                  <option selected="selected">Black &amp; Grey</option>
+                  <option>Red</option>
+                  <option>Green</option>
+                  <option>Yellow</option>
+                  <option>Orange</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="columns col-4 sort-options">
+              <span class="label-text">Type:</span>
+              <label for="material-select" class="select-label">
+                <select class="styled-drop-down" id="material-select" name="material-select">
+                  <option selected="selected">Slim</option>
+                  <option>Lorem Ipsum</option>
+                  <option>Lorem Ipsum</option>
+                  <option>Lorem Ipsum</option>
+                  <option>Lorem Ipsum</option>
+                </select>
+              </label>
+            </div>
+            
+          </div>
+
+          <div class="row product-options">
+            <div class="columns col-6">
+              <label for="product-quantity" class="product-quantity">
+                <span class="label-text">Quantity:</span>
+                <!-- <input type="text" value="1" id="product-quantity" /> -->
+                <input type="number" value="1" id="product-quantity" />
+              </label>              
+            </div>
+
+            <div class="columns col-6">
+              <button type="submit" class="submit">
+                <i class="fa fa-shopping-cart"></i> Add to cart
+              </button>              
+            </div>
+          </div>
+
+          <form>
+          <!-- end: product options form -->
+
+
+        </div>
+
+      </div>
+    </section>
+    <!-- end: main content -->
+
+
+
+    <!-- start: footer -->
+    <footer class="footer">
+      <div class="row max-inner">
+        
+        <div class="columns col-2">
+          <h3>Address</h3>
+          <p>
+            INDIGO LLC<br />
+            <br />
+            946 Park Ave<br />
+            New York, NY 10021<br />
+            <br />
+            <a href="#">office@indigo.com</a><br />
+            (445) 932 459 934<br />           
+          </p>
+        </div>
+
+        <div class="columns col-2">
+          <h3>Customer Service</h3>
+          <ul>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Money back guarantee</a></li>
+            <li><a href="#">Help center</a></li>
+            <li><a href="#">Delivery</a></li>
+            <li><a href="#">Payment</a></li>
+          </ul>
+        </div>
+
+        <div class="columns col-2">
+          <h3>Account</h3>
+          <ul>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Register</a></li>
+            <li><a href="#">My Account</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </div>
+
+        <div class="columns col-6">
+          <h3>Follow us</h3>
+          <div class="row">
+            <form class="newsletter-form">
+              <div class="columns col-8">
+                <input placeholder="Enter your Email ..." type="text">
+              </div>
+              <div class="columns col-4">
+                <input type="submit" value="Subscribe" class="submit">
+              </div>
+            </form>              
+          </div>
+          <div class="row">
+            <div class="columns col-12 social-links">
+              <a href="#"><i class="fa fa-facebook"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+              <a href="#"><i class="fa fa-google-plus"></i></a>
+              <a href="#"><i class="fa fa-pinterest"></i></a>
+            </div>            
+          </div>
+        </div>
+
+      </div>
+    </footer>
+    <!-- end: footer -->
+
+
+    <!-- start: copyright -->
+    <section class="footer-copyright">
+      <div class="row max-inner">
+        <div class="columns col-7 col-centered">
+          <p>Copyright 2014 Indigo. All rights reserved.</p>
+        </div>
+      </div>
+    </section>
+    <!-- end: copyright -->
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
+    
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src='//www.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+  </body>
+</html>
