@@ -3,7 +3,7 @@ import bdb
 from . import home
 from app import db
 from app.home.forms import LoginForm,RegisterForm
-from flask import render_template, url_for, redirect, flash, session
+from flask import render_template, url_for, redirect, flash, session, request
 
 from app.models import User,Books
 
@@ -84,3 +84,22 @@ def index():
     #print(Goods)
     new_goods = []
     # return render_template('home/index.html',new_goods=new_goods,sale_goods=sale_goods,hot_goods=hot_goods) # 渲染模板
+
+
+"""搜索框"""
+@home.route("/search")
+def search():
+    page = request.args.get('page', 1, type=int) # 获取page参数值
+    keywords = request.args.get('keywords','',type=str)
+
+    if keywords :
+        # 使用like实现模糊查询
+        page_data = Books.query.filter(Books.name.like("%"+keywords+"%")).order_by(
+            Books.addtime.desc()
+        ).paginate(page=page, per_page=12)
+    else :
+        page_data = Books.query.order_by(
+            Books.addtime.desc()
+        ).paginate(page=page, per_page=12)
+    hot_goods = Books.query.order_by(Books.views_count.desc()).limit(7).all()
+    return render_template("home/goods_search.html", page_data=page_data,keywords=keywords,hot_goods=hot_goods)
