@@ -1,90 +1,154 @@
 <!DOCTYPE html>
+<!-- saved from url=(0047)file:///D:/web%E8%84%9A%E6%9C%AC/WEB/login.html -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>注册-多抓鱼^3^小商城</title>
+
+    <title>注册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            background: url(../../static/image/home/login.png) no-repeat 0px 0px;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            -moz-background-size: 100% 100%;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }a
+
+        #loginDiv {
+            width: 37%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            background-color: rgba(75, 81, 95, 0.3);
+            box-shadow: 7px 7px 17px rgba(52, 56, 66, 0.5);
+            border-radius: 5px;
+        }
+
+        #name_trip {
+            margin-left: 50px;
+            color: red;
+        }
+
+        p {
+            margin-top: 30px;
+            margin-left: 20px;
+            color: azure;
+        }
+
+        input {
+            margin-left: 15px;
+            border-radius: 5px;
+            border-style: hidden;
+            height: 30px;
+            width: 140px;
+           background-color: rgba(216, 191, 216, 0.5);
+            outline: none;
+            color: #f0edf3;
+            padding-left: 10px;
+        }
+
+        .button {
+            border-color: cornsilk;
+            background-color: rgba(100, 149, 237, .7);
+            color: aliceblue;
+            border-style: hidden;
+            border-radius: 5px;
+            width: 100px;
+            height: 31px;
+            font-size: 16px;
+        }
+    </style>
 </head>
+
 <body>
-	<!-- 主体内容 -->
-	<div id="mr-mainbody" class="container mr-mainbody">
-		<div class="row">
-			<div id="mr-content" class="mr-content col-xs-12">
-				<div class="login-wrap"
-					style="margin-bottom: 60px; margin-top: 50px">
-					<div style="max-width: 540px; margin: 0 auto;">
-						<a href="login.html" title="点击返回首页">
-							<img src="{{url_for('static',filename='home/images/51logo.png')}}"></a>
-					</div>
-					<div class="register">
-						<!-- 用户注册表单 -->
-						<form  action="" method="post" class="form-horizontal">
-							<fieldset>
-								<div class="form-group">
-									<div class="col-sm-4 control-label">
-										{{form.username.label}}
-									</div>
-									<div class="col-sm-8">
-										<!-- 账户文本框 -->
-										{{form.username}}
-										{% for err in form.username.errors %}
-										<span class="error">{{ err }}</span>
-										{% endfor %}
-									</div>
-								</div>
-                                <div class="form-group">
-									<div class="col-sm-4 control-label">
-										{{form.phone.label}}
-									</div>
-									<div class="col-sm-8" style="clear: none;">
-										<!-- 输入联系电话的文本框 -->
-										{{form.phone}}
-										{% for err in form.phone.errors %}
-										<span class="error">{{ err }}</span>
-										{% endfor %}
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-4 control-label">
-										{{form.password.label}}
-									</div>
-									<div class="col-sm-8">
-										<!-- 密码文本框 -->
-										{{form.password}}
-										{% for err in form.password.errors %}
-										<span class="error">{{ err }}</span>
-										{% endfor %}
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-4 control-label">
-										{{form.repassword.label}}
-									</div>
-									<div class="col-sm-8">
-										<!-- 确认密码文本框 -->
-										{{form.repassword}}
-										{% for err in form.repassword.errors %}
-										<span class="error">{{ err }}</span>
-										{% endfor %}
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-offset-4 col-sm-8">
-										{{ form.csrf_token }}
-										{{ form.submit }}
-									</div>
-								</div>
-								<div class="form-group" style="margin: 20px;">
-									<label
-										style="float: right; color: #858585; margin-right: 80px; margin-top: 10px; font-size: 14px;">已有账号！<a
-										href="{{url_for('home.login')}}">去登录</a></label>
-								</div>
-							</fieldset>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- //主体内容 -->
-</body>
-</html>
+    <div id="loginDiv">
+{#        <a href="index.html" title="点击返回首页"><img src="{{url_for('static',filename='home/images/51logo.png')}}"></a>#}
+        <form action="" method="post" id="form">
+            <h1 style="text-align: center;color: aliceblue;">注册</h1>
+
+            <div class="form-group" style="text-align: center;width:100%;float: left;margin-top: 20px">
+                <div class="col-sm-4 control-label" style="text-align: right;width: 40%;float:left">
+                    <label id="username" for="userphone" class="required" style="color: aliceblue;">用户名：</label>
+                </div>
+                <div class="col-sm-6" style="width: 60%;float: left;text-align: left"><!-- 账户文本框 -->
+                    {{form.username}}
+                    {% for err in form.username.errors %}
+                        <span class="error">{{ err }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-group" style="text-align: center;width:100%;float: left;margin-top: 20px">
+                <div class="col-sm-4 control-label" style="text-align: right;width: 40%;float:left">
+                    <label id="username" for="userphone" class="required" style="color: aliceblue;">手机号：</label>
+                </div>
+                <div class="col-sm-6" style="width: 60%;float: left;text-align: left"><!-- 账户文本框 -->
+                    {{form.phone}}
+                    {% for err in form.phone.errors %}
+                        <span class="error">{{ err }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-group" style="text-align: center;width:100%;float: left;margin-top: 20px">
+                <div class="col-sm-4 control-label" style="text-align: right;width: 40%;float:left">
+                    <label id="password" for="password" class="required" style="color: aliceblue;">密 码：</label>
+                </div>
+                <div class="col-sm-6" style="width: 60%;float: left;text-align: left"><!-- 密码文本框 -->
+                    <!-- 密码文本框 -->
+                    {{form.password}}
+                    {% for err in form.password.errors %}
+                        <span class="error">{{ err }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-group" style="text-align: center;width:100%;float: left;margin-top: 20px">
+                <div class="col-sm-4 control-label" style="text-align: right;width: 40%;float:left">
+                    <label id="password" for="password" class="required" style="color: aliceblue;">确认密码：</label>
+                </div>
+                <div class="col-sm-6" style="width: 60%;float: left;text-align: left"><!-- 密码文本框 -->
+                    <!-- 确认密码文本框 -->
+                    {{form.repassword}}
+                    {% for err in form.repassword.errors %}
+                        <span class="error">{{ err }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-group" style="text-align: center;width:100%;float: left;margin-top: 20px">
+{#                <div class="form-group" style="text-align: center;margin-top: 20px">#}
+                <div class="col-sm-offset-4 col-sm-8">
+                        {{form.csrf_token}}
+                        {{form.submit}}
+                </div>
+                <div class="col-sm-offset-4 col-sm-8" style="background-color: lightblue">
+                    <label style="text-align: center; float: right; color: #858585; margin-right: 40px; margin-top: 10px; font-size: 14px;">已有帐户！
+                        <a href="{{url_for('home.login')}}">立即注册</a>
+                    </label>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+
+</body></html>
+
