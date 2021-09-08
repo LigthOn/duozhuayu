@@ -52,9 +52,12 @@ class Books(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # 编号
     ibsn = db.column(db.String(45))   # IBSN
     name = db.Column(db.String(255))  # 名称
+    author = db.Column(db.String(100))  # 名称
+    image = db.Column(db.String(45))  # 名称
     original_price = db.Column(db.DECIMAL(10,2))  # 原价
     current_price  = db.Column(db.DECIMAL(10,2))  # 现价
     sale_count = db.Column(db.Integer) # 售出的数量
+    views_count = db.Column(db.Integer)  # 浏览的数量
     # picture = db.Column(db.String(255))  # 图片
     # introduction = db.Column(db.Text)  # 商品简介
     # views_count = db.Column(db.Integer,default=0) # 浏览次数
@@ -66,8 +69,41 @@ class Books(db.Model):
     #supercat_id = db.Column(db.Integer, db.ForeignKey('supercat.id'))  # 所属大分类
     #subcat_id = db.Column(db.Integer, db.ForeignKey('subcat.id'))  # 所属小分类
     #addtime = db.Column(db.DateTime, index=True, default=datetime.now)  # 添加时间
-    #cart = db.relationship("Cart", backref='goods')  # 订单外键关系关联
-    #orders_detail = db.relationship("OrdersDetail", backref='goods')  # 订单外键关系关联
+    cart = db.relationship("Cart", backref='books')  # 订单外键关系关联
+    orders_detail = db.relationship("OrdersDetail", backref='books')  # 订单外键关系关联
 
     def __repr__(self):
         return "<Goods %r>" % self.name
+
+
+# 购物车
+class Cart(db.Model):
+    __tablename__ = 'cart'
+    id = db.Column(db.Integer, primary_key=True)  # 编号
+    book_id = db.Column(db.Integer, db.ForeignKey('books.id'))  # 所属商品
+    user_id = db.Column(db.Integer)  # 所属用户
+    quantity = db.Column(db.Integer, default=0)  # 购买数量
+    def __repr__(self):
+        return "<Cart %r>" % self.id
+
+
+"""订单"""
+class Orders(db.Model):
+    __tablename__ = 'orders'
+    id = db.Column(db.Integer, primary_key=True)  # 编号
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  # 所属用户
+    receive_name = db.Column(db.String(255))  # 收款人姓名
+    receive_address = db.Column(db.String(255))  # 收款人地址
+    receive_phone = db.Column(db.String(255))  # 收款人电话
+    addtime = db.Column(db.DateTime, index=True, default=datetime.now())
+    orders_detail = db.relationship("OrdersDetail", backref='orders')  # 外键关系关联
+    def __repr__(self):
+        return "<Orders %r>" % self.id
+
+"""订单详情"""
+class OrdersDetail(db.Model):
+    __tablename__ = 'orders_detail'
+    id = db.Column(db.Integer, primary_key=True)  # 编号
+    book_id = db.Column(db.Integer, db.ForeignKey('books.id'))  # 所属商品
+    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))  # 所属订单
+    quantity = db.Column(db.Integer, default=0)  # 购买数量

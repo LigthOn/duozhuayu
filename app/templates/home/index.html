@@ -26,25 +26,23 @@
     <header class="header">
       <div class="row max-inner">
           
-        <div class="columns col-2">
+        <div class="columns col-5">
           <a href="index.html" title="多抓鱼" class="logo">多抓ζ°)))彡</a>
         </div>
 
-        <div class="columns col-6">
+        <div class="columns col-4">
           <a href="#" class="toggle-nav">
             <i class="fa fa-bars"></i> Menu
           </a>
-          <nav class="main-nav">
-            <ul>
-              <li><a href="index.html">New collection</a></li>
-              <li><a href="index.html">Catalog</a></li>
-              <li><a href="index.html">Promotion</a></li>
-              <li><a href="index.html">Gift card</a></li>
-            </ul>
-          </nav>
+{#          <nav class="main-nav">#}
+{#            <ul>#}
+{#              <li><a href="index.html">New collection</a></li>#}
+{#              <li><a href="index.html">Catalog</a></li>#}
+{#            </ul>#}
+{#          </nav>#}
         </div>
 
-        <div class="columns col-4">
+        <div class="columns col-6">
           <ul class="header-controls">
             <li class="header-search">
               <a href="{{url_for('home.search')}}" class="reveal-search">
@@ -57,11 +55,19 @@
               </div>
             </li>
             <li class="header-cart">
-              <a href="cart.html" title="view cart">
+              <a href="{{url_for('home.shopping_cart')}}" title="view cart">
                 <span class="fa fa-shopping-cart"></span>
-                <span class="cart-count">3 Products,</span>
-                <span class="cart-amount">$780.00</span>
-              </a>                
+                <span class="cart-count">My Cart</span>
+              </a>
+            </li>
+            <li class="header-cart">
+              <a href="{{url_for('home.order_list')}}" title="view order">
+                <span class="fa fa-shopping-cart"></span>
+                <span class="cart-count">My Order</span>
+              </a>
+            </li>
+            <li class="header-actions">
+              <a href="{{url_for('home.login')}}" title="Log in"><span class="fa fa-lock"></span> Log in</a>
             </li>
             <li class="header-actions">
               <a href="{{url_for('home.logout')}}" title="Log out"><span class="fa fa-lock"></span> Log out</a>
@@ -148,13 +154,18 @@
 
         <!-- start: grid item -->
         <div class="columns col-3 grid-item">
-          <div class="grid-item-media"><a href="product.html"><img src="../../static/image/home/byx.png" /></a></div>
+          <div class="grid-item-media">
+              <a href="/books_detail/{{hot_books[0].id}}"><img src="{{url_for('static',filename='image/home/'+hot_books[0].image)}}" style="height: 320px; width: 250px"></a>
+          </div>
+{#                  <img src="../../static/image/home/byx.png" /></a></div>#}
+{#                  <a href="/goods_detail/{{item.id}}?type={{item.supercay#}
+
           <div class="grid-item-desc">
             <h2>
-              <a class="grid-item-link" href="product.html">
-                <span class="grid-item-meta">白夜行</span><hr />
-                <span class="grid-item-title">白夜行——东野圭吾</span>
-                <span class="grid-item-price">$22.00</span>
+              <a class="grid-item-link" href="books_detail.html">
+                <span class="grid-item-meta">{{hot_books[0].name}}</span>
+                <span class="grid-item-title">{{hot_books[0].author}}</span>
+                <span class="grid-item-price">{{hot_books[0].current_price}}</span>
               </a>
             </h2>
           </div>
@@ -162,13 +173,17 @@
         <!-- end: grid item -->
         <!-- start: grid item -->
         <div class="columns col-3 grid-item">
-          <div class="grid-item-media"><a href="product.html"><img src="../../static/image/home/pfdsj.jpg" /></a></div>
+          <div class="grid-item-media">
+            <a href="/books_detail/{{hot_books[1].id}}"><img src="{{url_for('static',filename='image/home/'+hot_books[1].image)}}" style="height: 320px; width: 250px">
+            </a>
+          </div>
+
           <div class="grid-item-desc">
             <h2>
-              <a href="product.html">
-                <span class="grid-item-meta">平凡的世界</span><hr />
-                <span class="grid-item-title">平凡的世界——路遥</span>
-                <span class="grid-item-price">$37.00</span>
+              <a href="books_detail.html">
+                <span class="grid-item-meta">{{hot_books[1].name}}</span>
+                <span class="grid-item-title">{{hot_books[1].author}}</span>
+                <span class="grid-item-price">{{hot_books[1].current_price}}</span>
               </a>
             </h2>
           </div>
@@ -176,13 +191,16 @@
         <!-- end: grid item -->
         <!-- start: grid item -->
         <div class="columns col-3 grid-item">
-          <div class="grid-item-media"><a href="product.html"><img src="../../static/image/home/ey.jpg" /></a></div>
+          <div class="grid-item-media">
+              <a href="/books_detail/{{hot_books[2].id}}"><img src="{{url_for('static',filename='image/home/'+hot_books[2].image)}}" style="height: 320px; width: 250px">
+              </a>
+          </div>
           <div class="grid-item-desc">
             <h2>
-              <a href="product.html">
-                <span class="grid-item-meta">恶意</span><hr />
-                <span class="grid-item-title">恶意——东野圭吾</span>
-                <span class="grid-item-price">$21.00</span>
+              <a href="books_detail.html">
+                <span class="grid-item-meta">{{hot_books[2].name}}</span>
+                <span class="grid-item-title">{{hot_books[2].author}}</span>
+                <span class="grid-item-price">{{hot_books[2].current_price}}</span>
               </a>
             </h2>
           </div>
@@ -190,13 +208,16 @@
         <!-- end: grid item -->
         <!-- start: grid item -->
         <div class="columns col-3 grid-item">
-          <div class="grid-item-media"><a href="product.html"><img src="../../static/image/home/xwzx.jpg" /></a></div>
+            <div class="grid-item-media">
+              <a href="/books_detail/{{hot_books[3].id}}"><img src="{{url_for('static',filename='image/home/'+hot_books[3].image)}}" style="height: 320px; width: 250px">
+              </a>
+            </div>
           <div class="grid-item-desc">
             <h2>
-              <a href="product.html">
-                <span class="grid-item-meta">希望之线</span><hr />
-                <span class="grid-item-title">希望之线——东野圭吾</span>
-                <span class="grid-item-price">$24.00</span>
+              <a href="books_detail.html">
+                <span class="grid-item-meta">{{hot_books[3].name}}</span>
+                <span class="grid-item-title">{{hot_books[3].author}}</span>
+                <span class="grid-item-price">{{hot_books[3].current_price}}</span>
               </a>
             </h2>
           </div>
@@ -208,8 +229,7 @@
     <!-- end: product grid -->
 
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
-    <script>window.jQuery || document.write('<script src="../../static/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
+   <script src="../../static/js/vendor/jquery-1.11.0.min.js"></script>
 
     <script src="../../static/js/plugins.js"></script>
     <script src="../../static/js/main.js"></script>

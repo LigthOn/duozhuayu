@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>登陆</title>
+    <title>填写收货地址</title>
     <style>
         * {
             margin: 0;
@@ -17,7 +17,7 @@
             overflow: hidden;
             margin: 0;
             padding: 0;
-            background: url(../../static/image/home/login.png) no-repeat 0px 0px;
+            background: url(../../static/image/home/address.png) no-repeat 0px 0px;
             background-repeat: no-repeat;
             background-size: 100% 100%;
             -moz-background-size: 100% 100%;
@@ -81,11 +81,20 @@
     <div id="loginDiv">
 {#        <a href="index.html" title="点击返回首页"><img src="{{url_for('static',filename='home/images/51logo.png')}}"></a>#}
         <form action="" method="post" id="form">
-            <h1 style="text-align: center;color: aliceblue;">登陆</h1>
+            <h1 style="text-align: center;color: aliceblue;">填写收货地址</h1>
 
             <div class="form-group" style="text-align: center;width:100%;float: left;margin-top: 20px">
                 <div class="col-sm-4 control-label" style="text-align: right;width: 40%;float:left">
-                    <label id="username" for="userphone" class="required" style="color: aliceblue;">手机号：</label>
+                    <label id="receivename" for="receivename" class="required" style="color: aliceblue;">收件人：</label>
+                </div>
+                <div class="col-sm-6" style="width: 60%;float: left;text-align: left"><!-- 账户文本框 -->
+                    {{form.receivename}}
+                </div>
+            </div>
+
+            <div class="form-group" style="text-align: center;width:100%;float: left;margin-top: 20px">
+                <div class="col-sm-4 control-label" style="text-align: right;width: 40%;float:left">
+                    <label id="phone" for="phone" class="required" style="color: aliceblue;">手机号：</label>
                 </div>
                 <div class="col-sm-6" style="width: 60%;float: left;text-align: left"><!-- 账户文本框 -->
                     {{form.phone}}
@@ -97,10 +106,10 @@
 
             <div class="form-group" style="text-align: center;width:100%;float: left;margin-top: 20px">
                 <div class="col-sm-4 control-label" style="text-align: right;width: 40%;float:left">
-                    <label id="password" for="password" class="required" style="color: aliceblue;">密 码：</label>
+                    <label id="password" for="password" class="required" style="color: aliceblue;">收货地址：</label>
                 </div>
                 <div class="col-sm-6" style="width: 60%;float: left;text-align: left"><!-- 密码文本框 -->
-                    {{form.password}}
+                    {{form.receiveaddress}}
                 </div>
             </div>
 
@@ -110,12 +119,6 @@
                         {{form.csrf_token}}
                         {{form.submit}}
                 </div>
-                <div class="col-sm-offset-4 col-sm-8">
-                    <label style="text-align: center; float: right; color: #858585; margin-right: 40px; margin-top: 10px; font-size: 14px;">没有账户？
-                        <a href="{{url_for('home.register')}}">立即注册</a>
-                    </label>
-                </div>
-
             </div>
         </form>
     </div>

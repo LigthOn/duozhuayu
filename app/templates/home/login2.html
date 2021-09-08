@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录-多抓鱼^3^</title>
+</head>
+<body>
+	<div id="mr-mainbody" class="container mr-mainbody">
+		<div class="row">
+			<!-- 主体内容 -->
+			<div id="mr-content" class="mr-content col-xs-12">
+				<div class="login-wrap" style="margin-bottom: 60px; margin-top: 50px">
+					<div style="max-width: 540px; margin: 0 auto;">
+						<a href="index.html" title="点击返回首页"><img src="{{url_for('static',filename='home/images/51logo.png')}}"></a>
+					</div>
+					<div class="login">
+						<!-- 用户登录表单 -->
+						<form action="" method="post" class="form-horizontal">
+							<fieldset>
+								<div class="form-group">
+									<div class="col-sm-4 control-label">
+										<label id="username-lbl" for="userphone" class="required">手机号 ：</label>
+									</div>
+									<div class="col-sm-8">
+										<!-- 账户文本框 -->
+										{{form.phone}}
+										{% for err in form.phone.errors %}
+										<span class="error">{{ err }}</span>
+										{% endfor %}
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-4 control-label">
+										<label id="password" for="password" class="required">密码 ：</label>
+									</div>
+									<div class="col-sm-8">
+										<!-- 密码文本框 -->
+										{{form.password}}
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-4 col-sm-8">
+										{{form.csrf_token}}
+										{{form.submit}}
+									</div>
+								</div>
+								<div class="form-group"
+									style="border-top: 1px solid #D9D9D9; margin: 20px;">
+									<label
+										style="float: right; color: #858585; margin-right: 40px; margin-top: 10px; font-size: 14px;">没有账户？<a
+										href="{{url_for('home.register')}}">立即注册</a></label>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- //主体内容 -->
+		</div>
+	</div>
+</body>
+
+{#<body>#}
+{#    <div id="login">#}
+{#        <h1>Login</h1>#}
+{#        <form method="post">#}
+{#            <input type="text" required="required" placeholder="手机号" name="u"></input>#}
+{#            <input type="password" required="required" placeholder="密码" name="p"></input>#}
+{#            <button class="but" type="submit">登录</button>#}
+{#        </form>#}
+{#    </div>#}
+{#</body>#}
+</html>

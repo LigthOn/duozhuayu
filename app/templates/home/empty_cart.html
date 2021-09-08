@@ -27,23 +27,23 @@
     <header class="header">
       <div class="row max-inner">
 
-        <div class="columns col-5">
-          <a href="index.html" title="多抓鱼" class="logo">多抓ζ°)))彡</a>
+        <div class="columns col-2">
+          <a href="{{url_for('home.index')}}" title="多抓鱼" class="logo">多抓ζ°)))彡</a>
         </div>
 
-        <div class="columns col-4">
+        <div class="columns col-5">
           <a href="#" class="toggle-nav">
             <i class="fa fa-bars"></i> Menu
           </a>
-{#          <nav class="main-nav">#}
-{#            <ul>#}
-{#              <li><a href="index.html">New collection</a></li>#}
-{#              <li><a href="index.html">Catalog</a></li>#}
-{#            </ul>#}
-{#          </nav>#}
+          <nav class="main-nav">
+            <ul>
+              <li><a href="{{url_for('home.index')}}">New collection</a></li>
+              <li><a href="{{url_for('home.index')}}">Catalog</a></li>
+            </ul>
+          </nav>
         </div>
 
-        <div class="columns col-6">
+        <div class="columns col-5">
           <ul class="header-controls">
             <li class="header-search">
               <a href="{{url_for('home.search')}}" class="reveal-search">
@@ -61,13 +61,8 @@
                 <span class="cart-count">My Cart</span>
               </a>
             </li>
-            <li class="header-cart">
-              <a href="{{url_for('home.order_list')}}" title="view order">
-                <span class="fa fa-shopping-cart"></span>
-                <span class="cart-count">My Order</span>
-              </a>
-            </li>
-            <li class="header-actions">
+
+              <li class="header-actions">
               <a href="{{url_for('home.login')}}" title="Log in"><span class="fa fa-lock"></span> Log in</a>
             </li>
             <li class="header-actions">
@@ -97,7 +92,7 @@
 
         <div class="columns col-12" style="text-align: center">
         <!-- start: cart form -->
-        <form action="{{url_for('home.order_add')}}">
+        <form>
           <table class="cart-table" cellspacing="0" style="margin: 0 auto">
             <thead>
               <tr>
@@ -119,30 +114,28 @@
                 ${{item.books.current_price}}
               </td>
               <td class="product-quantity" style="width: 15%">
-                <label for="quantity-select" class="select-label" getNumber="{{ item.quantity }}">
-                  <select class="styled-drop-down quantity"  onchange="updateCart({{item.book_id}})">
-{#                    <select class="styled-drop-down quantity">#}
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                </label>
+{#                <label for="quantity-select" class="select-label">#}
+{#                  <select class="styled-drop-down quantity"  name="quantity-select">#}
+{#                    <option selected="selected">1</option>#}
+{#                    <option>2</option>#}
+{#                    <option>3</option>#}
+{#                    <option>4</option>#}
+{#                    <option>5</option>#}
+{#                  </select>#}
+{#                </label>#}
+                  {{item.quantity}}
               </td>
               <td class="product-total" style="width: 15%">
                 ${{item.books.current_price*item.quantity}}
               </td>
               <td class="product-remove" style="width: 15%">
-                  <a href="/book_delete?bookid={{item.book_id}}">删除书籍</a>
               </td>
-
             </tr>
             {% endfor %}
             <!-- end: cart item -->
             </tbody>
           </table>
-{#          <!-- start: cart summary -->#}
+          <!-- start: cart summary -->
           <table class="cart-details">
             <tbody>
             <tr class="spacer-row"><td colspan="5"></td></tr>
@@ -150,14 +143,17 @@
               <td class="cart-summary" colspan="3">
                 Summary
               </td>
+              <td class="cart-subtotals">
+                <span>Subtotal:</span> $780.00
+              </td>
+              <td class="cart-shipping">
+                <span>Shipment:</span> $25.00
+              </td>
               <td class="cart-total">
-                <span>Total to pay:</span>
-                <h2 class="crat-total-h"></h2>
+                <span>Total to pay:</span> $805.00
               </td>
               <td class="cart-submit">
-                <input type="submit" class="cart-submit" name="cart-submit" value="Finalize and Pay">
-{#                  <a herf="{{url_for('home.order_add')}}">Finalize and pay</a>#}
-{#                  {{form.submit}}#}
+                <input type="submit" class="cart-submit" name="cart-submit" value="Finalize and pay" />
               </td>
             </tr>
             </tbody>
@@ -260,55 +256,21 @@
       g.src='//www.google-analytics.com/ga.js';
       s.parentNode.insertBefore(g,s)}(document,'script'));
     </script>
-    <script>
-        window.onload = function (){
-            var sum = 0;
-            $(".cart-table tr").each(function(index,item){
-                if (index > 0){
-                    const quantity =  $(item).find(".select-label").attr("getNumber")
-                    {#$(item).find("select").val(quantity)#}
-                    {#$(item).find(".quantity option[text=quantity]").attr("selected",true);#}
-                    $(item).find(".dk_label").text(quantity)
-                    const price = $(item).find(".product-price").text().replace("$", "")
-                    sum = +price * +quantity + sum
-                    $(item).find(".product-total").text("$" + +price * +quantity)
-                }
-            })
-            $('.crat-total-h').text("$" + sum)
-            {#$(".cart-table tr").find(".quantity").change(function () {#}
-            {#    const price = $(this).parents("tr").find(".product-price").text().replace("$", "")#}
-            {#    const quantity = $(this).parents("tr").find(".quantity option:selected").text()#}
-            {#    $(this).parents("tr").find(".product-total").text("$" + +price * +quantity)#}
-                {#window.location.href = '/cart_add?book_id='+1+"&quantity="+2})#}
-        }
-    </script>
-
-    <script type="text/javascript">
-      function updateCart(book_id) {
-
-        var user_id = {{user_id}} //获取当前用户的id
-        if(!user_id){
-            window.location.href = "/login/"; //如果没有登录，跳转到登录页
-            return;
-        }
-        {#const quantity = $(item).find(".quantity option:selected").text()#}
-{##}
-{#        var quantity = ${this}.find(".dk_label").text();//获取输入的商品数量#}
-{#        //验证输入的数量是否合法#}
-{#        if (+quantity < 1) {//如果输入的数量不合法#}
-{#            alert('数量不能小于1！');#}
-{#            return;#}
+{#    <script>#}
+{#        window.onload = function (){#}
+{#            $(".cart-table tr").each(function(index,item){#}
+{#                if (index > 0){#}
+{#                    const price = $(item).find(".product-price").text().replace("$", "")#}
+{#                    const quantity = $(item).find(".quantity option:selected").text()#}
+{#                    $(item).find(".product-total").text("$" + +price * +quantity)#}
+{#                }#}
+{#            })#}
+{#            $(".cart-table tr").find(".quantity").change(function (){#}
+{#                const price = $(this).parents("tr").find(".product-price").text().replace("$", "")#}
+{#                const quantity = $(this).parents("tr").find(".quantity option:selected").text()#}
+{#                $(this).parents("tr").find(".product-total").text("$" + +price * +quantity)#}
+{#            })#}
 {#        }#}
-
-          $(".cart-table tr").find(".quantity").change(function () {
-              var price = $(this).parents("tr").find(".product-price").text().replace("$", "")
-              var quantity = $(this).parents("tr").find(".quantity option:selected").text()
-                $(this).parents("tr").find(".product-total").text("$" + +price * +quantity)
-              window.location.href = '/cart_update?book_id='+book_id+"&quantity="+ quantity
-            })
-      }
-    </script>
-
-
+{#    </script>#}
   </body>
 </html>

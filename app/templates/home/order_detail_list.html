@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>首页-多抓鱼^3^</title>
+    <title>我的订单-多抓鱼^3^</title>
 
     <meta name="description" content="多抓鱼^3^">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
@@ -22,7 +22,7 @@
 
 <body>
 
-  <!-- 导航栏 -->
+   <!-- 导航栏 -->
     <!-- start: header -->
     <header class="header">
       <div class="row max-inner">
@@ -85,7 +85,8 @@
       <div class="columns col-12">
         <ul class="breadcrumb-list">
           <li><a href="{{url_for('home.index')}}">Home</a></li>
-          <li>Cart</li>
+          <li><a href="{{url_for('home.order_list')}}">Orders</a></li>
+          <li>Order Detail</li>
         </ul>
       </div>
     </section>
@@ -101,17 +102,20 @@
           <table class="cart-table" cellspacing="0" style="margin: 0 auto">
             <thead>
               <tr>
+                <th class="order-id">OrderID</th>
                 <th class="product-thumbnail">Book</th>
                 <th class="product-price">Price</th>
                 <th class="product-quantity">Quantity</th>
                 <th class="product-total">Total</th>
-                <th class="product-remove">&nbsp;</th>
               </tr>
             </thead>
             <tbody>
             <!-- start: cart item -->
-            {% for item in cart %}
+            {% for item in orders %}
             <tr class="cart-item" valign="middle">
+              <td class="order-id" style="width: 100px" align="middle">
+                {{item.order_id}}
+              </td>
               <td class="product-thumbnail" style="width: 400px" align="middle">
                 <a href="/books_detail/{{item.books.id}}"><img src="{{url_for('static',filename='image/home/'+item.books.image)}}" style="height: 200px; width: 150px"></a>
               </td>
@@ -119,49 +123,17 @@
                 ${{item.books.current_price}}
               </td>
               <td class="product-quantity" style="width: 15%">
-                <label for="quantity-select" class="select-label" getNumber="{{ item.quantity }}">
-                  <select class="styled-drop-down quantity"  onchange="updateCart({{item.book_id}})">
-{#                    <select class="styled-drop-down quantity">#}
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                </label>
+                {{item.quantity}}
               </td>
               <td class="product-total" style="width: 15%">
                 ${{item.books.current_price*item.quantity}}
               </td>
-              <td class="product-remove" style="width: 15%">
-                  <a href="/book_delete?bookid={{item.book_id}}">删除书籍</a>
-              </td>
-
             </tr>
             {% endfor %}
             <!-- end: cart item -->
             </tbody>
           </table>
 {#          <!-- start: cart summary -->#}
-          <table class="cart-details">
-            <tbody>
-            <tr class="spacer-row"><td colspan="5"></td></tr>
-            <tr>
-              <td class="cart-summary" colspan="3">
-                Summary
-              </td>
-              <td class="cart-total">
-                <span>Total to pay:</span>
-                <h2 class="crat-total-h"></h2>
-              </td>
-              <td class="cart-submit">
-                <input type="submit" class="cart-submit" name="cart-submit" value="Finalize and Pay">
-{#                  <a herf="{{url_for('home.order_add')}}">Finalize and pay</a>#}
-{#                  {{form.submit}}#}
-              </td>
-            </tr>
-            </tbody>
-          </table>
           <!-- end: cart summary -->
         </form>
 
@@ -260,55 +232,6 @@
       g.src='//www.google-analytics.com/ga.js';
       s.parentNode.insertBefore(g,s)}(document,'script'));
     </script>
-    <script>
-        window.onload = function (){
-            var sum = 0;
-            $(".cart-table tr").each(function(index,item){
-                if (index > 0){
-                    const quantity =  $(item).find(".select-label").attr("getNumber")
-                    {#$(item).find("select").val(quantity)#}
-                    {#$(item).find(".quantity option[text=quantity]").attr("selected",true);#}
-                    $(item).find(".dk_label").text(quantity)
-                    const price = $(item).find(".product-price").text().replace("$", "")
-                    sum = +price * +quantity + sum
-                    $(item).find(".product-total").text("$" + +price * +quantity)
-                }
-            })
-            $('.crat-total-h').text("$" + sum)
-            {#$(".cart-table tr").find(".quantity").change(function () {#}
-            {#    const price = $(this).parents("tr").find(".product-price").text().replace("$", "")#}
-            {#    const quantity = $(this).parents("tr").find(".quantity option:selected").text()#}
-            {#    $(this).parents("tr").find(".product-total").text("$" + +price * +quantity)#}
-                {#window.location.href = '/cart_add?book_id='+1+"&quantity="+2})#}
-        }
-    </script>
-
-    <script type="text/javascript">
-      function updateCart(book_id) {
-
-        var user_id = {{user_id}} //获取当前用户的id
-        if(!user_id){
-            window.location.href = "/login/"; //如果没有登录，跳转到登录页
-            return;
-        }
-        {#const quantity = $(item).find(".quantity option:selected").text()#}
-{##}
-{#        var quantity = ${this}.find(".dk_label").text();//获取输入的商品数量#}
-{#        //验证输入的数量是否合法#}
-{#        if (+quantity < 1) {//如果输入的数量不合法#}
-{#            alert('数量不能小于1！');#}
-{#            return;#}
-{#        }#}
-
-          $(".cart-table tr").find(".quantity").change(function () {
-              var price = $(this).parents("tr").find(".product-price").text().replace("$", "")
-              var quantity = $(this).parents("tr").find(".quantity option:selected").text()
-                $(this).parents("tr").find(".product-total").text("$" + +price * +quantity)
-              window.location.href = '/cart_update?book_id='+book_id+"&quantity="+ quantity
-            })
-      }
-    </script>
-
 
   </body>
 </html>

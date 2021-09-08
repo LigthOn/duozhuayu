@@ -102,5 +102,51 @@ class LoginForm(FlaskForm):
     )
 
 
+"""address"""
+class AddressForm(FlaskForm):
+    receivename = StringField(
+        label="账户 ：",
+        validators=[
+            DataRequired("收件人不能为空！")
+        ],
+        description="收件人",
+        render_kw={
+            "type": "text",
+            "placeholder": "收件人",
+            "class": "validate-username",
+            "size": 38,
+        }
+    )
 
+    phone = StringField(
+        validators=[
+            DataRequired("手机号不能为空！"),
+            Regexp("1[34578][0-9]{9}", message="手机号码格式不正确")
+        ],
+        description="手机号",
+        render_kw={
+            "type": "text",
+            "placeholder": "收件人联系电话！",
+            "size": 38,
+        }
+    )
 
+    receiveaddress = StringField(
+        label="收件地址 ：",
+        validators=[
+            DataRequired("收件地址不能为空！")
+        ],
+        description="收件地址",
+        render_kw={
+            "type": "text",
+            "placeholder": "收件地址",
+            "size": 38,
+        }
+    )
+
+    submit = SubmitField(
+        '提交订单',
+        render_kw={
+            "class": "btn btn-primary login",
+        }
+    )

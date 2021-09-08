@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>首页-多抓鱼^3^</title>
+
+    <meta name="description" content="多抓鱼^3^">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+    <link rel="stylesheet" href="../../static/css/normalize-and-boilerplate.css" />
+    <link rel="stylesheet" href="../../static/css/font-awesome.css" />
+    <link rel="stylesheet" href="../../static/css/flexslider.css" />
+    <link rel="stylesheet" href="../../static/css/style.css" />
+
+    <script src="../../static/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script src="../../static/js/vendor/jquery-1.11.0.min.js"></script>
+
+    <script type="text/javascript">
+      function addCart() {
+        var user_id = {{user_id}}; //获取当前用户的id
+        var book_id = {{book.id}}
+        if(!user_id){
+            window.location.href = "/login/"; //如果没有登录，跳转到登录页
+            return ;
+        }
+        var quantity = $('#product-quantity').val();//获取输入的商品数量
+        //验证输入的数量是否合法
+        if (quantity < 1) {//如果输入的数量不合法
+            alert('数量不能小于1！');
+            return;
+        }
+        window.location.href = '/cart_add?book_id='+book_id+"&quantity="+quantity
+      }
+    </script>
+
+
+  </head>
+  <body>
+
+   <!-- 导航栏 -->
+    <!-- start: header -->
+    <header class="header">
+      <div class="row max-inner">
+
+        <div class="columns col-5">
+          <a href="index.html" title="多抓鱼" class="logo">多抓ζ°)))彡</a>
+        </div>
+
+        <div class="columns col-4">
+          <a href="#" class="toggle-nav">
+            <i class="fa fa-bars"></i> Menu
+          </a>
+{#          <nav class="main-nav">#}
+{#            <ul>#}
+{#              <li><a href="index.html">New collection</a></li>#}
+{#              <li><a href="index.html">Catalog</a></li>#}
+{#            </ul>#}
+{#          </nav>#}
+        </div>
+
+        <div class="columns col-6">
+          <ul class="header-controls">
+            <li class="header-search">
+              <a href="{{url_for('home.search')}}" class="reveal-search">
+                <i class="fa fa-search"></i> Search
+              </a>
+              <div class="search-wrapper">
+                <form class="search-form">
+                    <input placeholder="Search..." type="text">
+                </form>
+              </div>
+            </li>
+            <li class="header-cart">
+              <a href="{{url_for('home.shopping_cart')}}" title="view cart">
+                <span class="fa fa-shopping-cart"></span>
+                <span class="cart-count">My Cart</span>
+              </a>
+            </li>
+            <li class="header-cart">
+              <a href="{{url_for('home.order_list')}}" title="view order">
+                <span class="fa fa-shopping-cart"></span>
+                <span class="cart-count">My Order</span>
+              </a>
+            </li>
+            <li class="header-actions">
+              <a href="{{url_for('home.login')}}" title="Log in"><span class="fa fa-lock"></span> Log in</a>
+            </li>
+            <li class="header-actions">
+              <a href="{{url_for('home.logout')}}" title="Log out"><span class="fa fa-lock"></span> Log out</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </header>
+    <!-- end: header -->
+
+    <!-- start: breadcrumbs -->
+    <section class="row breadcrumbs max-inner">
+      <div class="columns col-12">
+        <ul class="breadcrumb-list">
+          <li><a href="{{url_for('home.index')}}">Home</a></li>
+          <li>Product page</li>
+        </ul>
+      </div>
+    </section>
+    <!-- end: breadcrumbs -->
+
+    <!-- start: main content -->
+    <section class="main-content">
+      <div class="row max-inner">
+
+        <div class="columns col-5 product-media">
+            <a href="/books_detail/{{book.id}}"><img src="{{url_for('static',filename='image/home/'+book.image)}}" style="height: 640px; width: 500px"></a>
+        </div>
+
+        <div class="columns col-6 product-info float-right">
+
+          <span class="product-meta">Book name</span>
+            <h2>{{book.name}}</h2>
+            <span class="product-price">${{book.current_price}}</span>
+
+          <div class="row product-desc">
+            <p>
+              Perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas.
+            </p>
+          </div>
+
+
+          <!-- start: product options form -->
+          <form action="">
+
+          <div class="row product-options">
+            <div class="columns col-6">
+              <label for="product-quantity" class="product-quantity">
+                <span class="label-text">Quantity:</span>
+                <input type="number" value="1" id="product-quantity" />
+              </label>
+            </div>
+
+            <div class="columns col-6">
+              <button type="button" class="submit" onclick="addCart()">
+                <i class="fa fa-shopping-cart"></i> Add to cart
+              </button>
+            </div>
+          </div>
+
+          </form>
+          <!-- end: product options form -->
+
+
+        </div>
+
+      </div>
+    </section>
+    <!-- end: main content -->
+
+    <script src="../../static/js/plugins.js"></script>
+    <script src="../../static/js/main.js"></script>
+
+    <script>
+      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src='//www.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+
+
+  </body>
+</html>
