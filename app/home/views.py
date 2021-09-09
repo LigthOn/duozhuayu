@@ -79,10 +79,8 @@ def logout():
 """首页"""
 @home.route("/")
 def index():
-    # 获取10个热门商品
+    # 获取数据库中的商品，碍于排版只取了四个
     hot_books = Books.query.order_by(Books.sale_count.desc()).limit(4).all()
-    #print(hot_books[0].name)
-    # print("hello")
     return render_template('home/index.html', hot_books=hot_books) #渲染模板
 
     # 获取2个热门商品
@@ -144,9 +142,6 @@ def cart_add():
     book_id = request.args.get('book_id'),
     quantity = request.args.get('quantity'),
     user_id = session.get('user_id', 0)  # 获取用户ID,判断用户是否登录
-    print(user_id)
-    # cart = Cart.query.filter_by(user_id=user_id).update({'user_id': 0})
-    # cart = Cart.query.filter_by(book_id=book_id).first()
     cart = Cart.query.filter_by(user_id=user_id, book_id=book_id).first()
     if cart:
         curr_quantity = cart.quantity

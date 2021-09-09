@@ -285,13 +285,21 @@
 
     <script type="text/javascript">
       function updateCart(book_id) {
-
         var user_id = {{user_id}} //获取当前用户的id
         if(!user_id){
             window.location.href = "/login/"; //如果没有登录，跳转到登录页
             return;
         }
-        {#const quantity = $(item).find(".quantity option:selected").text()#}
+        $(".cart-table tr").find(".quantity").change(function () {
+            var price = $(this).parents("tr").find(".product-price").text().replace("$", "")
+            var quantity = $(this).parents("tr").find(".quantity option:selected").text()
+            $(this).parents("tr").find(".product-total").text("$" + +price * +quantity)
+            window.location.href = '/cart_update?book_id='+book_id+"&quantity="+ quantity
+        })
+      }
+    </script>
+
+            {#const quantity = $(item).find(".quantity option:selected").text()#}
 {##}
 {#        var quantity = ${this}.find(".dk_label").text();//获取输入的商品数量#}
 {#        //验证输入的数量是否合法#}
@@ -299,16 +307,5 @@
 {#            alert('数量不能小于1！');#}
 {#            return;#}
 {#        }#}
-
-          $(".cart-table tr").find(".quantity").change(function () {
-              var price = $(this).parents("tr").find(".product-price").text().replace("$", "")
-              var quantity = $(this).parents("tr").find(".quantity option:selected").text()
-                $(this).parents("tr").find(".product-total").text("$" + +price * +quantity)
-              window.location.href = '/cart_update?book_id='+book_id+"&quantity="+ quantity
-            })
-      }
-    </script>
-
-
   </body>
 </html>
